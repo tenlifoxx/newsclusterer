@@ -1,7 +1,9 @@
 ### 크롤링 대상 페이지 url 생성
 
+import os
 import requests
 from bs4 import BeautifulSoup
+import json
 
 
 def makeHTML(url, params):
@@ -23,7 +25,7 @@ def linksFromHTML(html):
     title_link = []
 
     soup = BeautifulSoup(html, "html.parser")
-    ul = soup.select_one("#wrap > div.rankingnews > div.rankingnews_box._officeResult > div:nth-child(2) > ul")
+    ul = soup.select_one("#wrap > div.rankingnews > div.rankingnews_box._officeResult > div > ul")
     lines = ul.select('li > div > a')
 
     for t in lines:
@@ -46,3 +48,25 @@ def parseNews(html):
     content = soup.select_one("#articleBodyContents").get_text()
 
     return content
+
+
+
+def writeFile(directory, name, serial, content):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    file_name = name + '_' + serial + '.txt'
+    file = open(os.path.join(directory, file_name), 'w')
+    file.write(content)
+
+    file.close()
+
+    return file_name
+
+
+def writeInfo(directory, serial, info):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    file_name = 'info' + '_' + serial + '.json'
+    file = open(os.path.join(directory, file_name), 'w')
+    file.write(json.dumps(info, ensure_ascii=False))
+    file.close()
