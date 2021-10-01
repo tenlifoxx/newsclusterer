@@ -8,7 +8,7 @@ if __name__ == "__main__":
     start = time.time()
     strfstart = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
     directory = os.path.join('data', strfstart)
-    press_no = {'중앙': '025', 'JTBC': '437', 'YTN': '052', '연합': '001', 'SBS': '055',
+    press_no = {'중앙': '025', 'JTBC': '437', 'YTN': '052', 'SBS': '055',
                 'KBS': '056', 'MBC': '214', '한겨레': '028', '경향': '032', '조선': '023'}
     files = {}
     links = crawl.linksOfPress(press_no)

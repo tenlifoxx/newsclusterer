@@ -6,7 +6,7 @@ import os
 def clean_text(text):
     text = text.replace("// flash 오류를 우회하기 위한 함수 추가", " ")
     text = text.replace("function _flash_removeCallback() {}", " ")
-    text = re.sub('[^\w\s]', ' ', text)
+    # text = re.sub('[^\w\s]', ' ', text)
     text = re.sub(r'\s+', ' ', text) #remove extra spaces
     text = re.sub(r'\s+', ' ', text) #remove spaces
     text = re.sub(r"^\s+", '', text) #remove space from start
